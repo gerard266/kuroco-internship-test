@@ -6,21 +6,39 @@
           {{ error }}
         </p>
         <div>
-          <label>prop1</label>
+          <label>name1</label>
           <input
-            v-model="user.prop1"
-            name="prop1"
+            v-model="user.name1"
+            name="name1"
             type="text"
-            placeholder="prop1"
+            placeholder="name1"
           />
         </div>
         <div>
-          <label>prop2</label>
+          <label>name2</label>
           <input
-            v-model="user.prop2"
-            name="prop2"
+            v-model="user.name2"
+            name="name2"
             type="text"
-            placeholder="prop2"
+            placeholder="name2"
+          />
+        </div>
+        <div>
+          <label>email</label>
+          <input
+            v-model="user.email"
+            name="email"
+            type="email"
+            placeholder="email"
+          />
+        </div>
+        <div>
+          <label>login_pwd</label>
+          <input
+            v-model="user.login_pwd"
+            name="login_pwd"
+            type="password"
+            placeholder="login_pwd"
           />
         </div>
         <div>
@@ -40,12 +58,30 @@ const user = ref({});
 
 const error = ref(null);
 const signup = async () => {
-  // Dummy request (success/failure after 1sec delay)
-};
+  try {
+    const config = useRuntimeConfig();
+    // New member registration request using useFetch
+    const response = await fetch(
+      `${config.public.apiBase}/rcms-api/5/member/regist`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user.value), // Use the form content as the request body
+      },
+    );
 
-const signup = () => {
-  console.log(JSON.stringify(user.value, null, "\t"));
-  signupDone.value = true;
+    if (!response.ok) {
+      const body = await response.json().catch(() => null);
+      console.error("Register failed:", body);
+      throw new Error("Failed to Register");
+    }
+    signupDone.value = true;
+  } catch (e) {
+    console.error(e);
+    error.value = "An error has occured.";
+  }
 };
 </script>
 

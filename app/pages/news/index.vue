@@ -11,6 +11,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+  middleware: ["auth"],
+});
 import LanguageSwitcher from "~~/components/LanguageSwitcher.vue";
 const config = useRuntimeConfig();
 const lang = ref(useI18n().locale.value);

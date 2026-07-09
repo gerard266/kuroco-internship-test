@@ -19,5 +19,5 @@ export default defineNuxtConfig({
       lazy: true,
       langDir: "locales/",
     },
-  ], "@nuxtjs/i18n"],
+  ], "@nuxtjs/i18n", "@pinia/nuxt"],
 });
