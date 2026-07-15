@@ -1,6 +1,5 @@
 <template>
   <div>
-    <LanguageSwitcher />
     <h1 class="title">{{ $t("news.title") }}</h1>
     <div v-for="n in response.list" :key="n.slug">
       <nuxt-link :to="$localePath(`/news/${n.topics_id}`)">
@@ -11,10 +10,6 @@
 </template>
 
 <script setup>
-definePageMeta({
-  middleware: ["auth"],
-});
-import LanguageSwitcher from "~~/components/LanguageSwitcher.vue";
 const config = useRuntimeConfig();
 const lang = ref(useI18n().locale.value);
 const { data: response } = await useFetch(

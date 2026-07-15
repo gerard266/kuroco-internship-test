@@ -1,6 +1,5 @@
 <template>
   <div>
-    <LanguageSwitcher />
     <section>
       <h1>{{ response.details.inquiry_name }}</h1>
 
@@ -84,7 +83,6 @@
 </template>
 
 <script setup>
-import LanguageSwitcher from "~~/components/LanguageSwitcher.vue";
 const lang = ref(useI18n().locale.value);
 const FORM_ID = 3;
 const submitted = ref(false);

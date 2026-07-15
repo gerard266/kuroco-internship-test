@@ -1,6 +1,5 @@
 <template>
   <div>
-    <LanguageSwitcher />
     <div v-if="error" class="error">News article not found</div>
     <div v-else-if="response?.details">
       <h1 class="title">{{ response.details.subject }}</h1>
